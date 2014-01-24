@@ -18,7 +18,7 @@ rand(4..10).times do
 	u.skip_confirmation!
 	u.save
 
-	rand(30..40).times do
+	rand(15..20).times do
 		topic = topics.first
 		p = u.posts.create(
 			topic: topic,
@@ -29,12 +29,19 @@ rand(4..10).times do
 
 		topics.rotate!
 
-		rand(3..7).times do
-			p.comments.create(
-				body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
-		end
 	end
 end
+
+post_count = Post.count
+User.all.each do |user|
+	rand(10..15).times do
+		p = Post.find(rand(1..post_count))
+		c = user.comments.create(
+			body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
+		c.update_attribute(:created_at, Time.now - rand(600..31536000))
+	end
+end
+
 
 u = User.new(
 	name: 'Admin User',
