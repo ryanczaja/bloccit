@@ -39,6 +39,10 @@ User.all.each do |user|
 		c = user.comments.create(
 			body: Faker::Lorem.paragraphs(rand(1..2)).join("\n"))
 		c.update_attribute(:created_at, Time.now - rand(600..31536000))
+
+		p.update_attribute(:created_at, Time.now - rand(600..31536000))
+		p.update_rank
+		topics.rotate!
 	end
 end
 
