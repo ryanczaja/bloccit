@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
   		flash[:error] = "There was an error saving the comment. Please try again."
   	end
     respond_with(@comment) do |f|
-      f.html {redirect_to[@topic, @post]}
+      f.html { redirect_to [@topic, @post] }
     end
 	end
 
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
     end
 
     respond_with(@comment) do |f|
-      f.html {redirect_to [@topic, @post]}
+      f.html { redirect_to [@topic, @post] }
     end
   end
 
